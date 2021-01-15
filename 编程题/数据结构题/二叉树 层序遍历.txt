@@ -1,0 +1,55 @@
+// 层序遍历
+    void levelOrderTraversal(Node root) {
+        if(root == null) {
+            return;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node cur = queue.poll();
+            System.out.print(cur.val+" ");
+            if(cur.left != null) {
+                queue.offer(cur.left);
+            }
+            if(cur.right != null) {
+                queue.offer(cur.right);
+            }
+        }
+    }
+
+
+//层序遍历分层打印
+
+    public List<List<Character>> levelOrder(Node root) {
+        List<List<Character>> ret = new ArrayList<>();
+        if(root == null) {
+            return ret;
+        }
+        //queue:保证顺序
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+
+            //rowList:每一行的数据
+            List<Character> rowList = new ArrayList<>();
+            int count = queue.size();//1
+
+            while (count != 0) {//2->1
+                
+                Node cur = queue.poll();
+                if(cur != null) {
+                    rowList.add(cur.val);
+                    if(cur.left != null) {
+                        queue.offer(cur.left);
+                    }
+                    if(cur.right != null) {
+                        queue.offer(cur.right);
+                    }
+                }
+                count--;//0
+            }
+
+            ret.add(rowList);
+        }
+        return ret;
+    }

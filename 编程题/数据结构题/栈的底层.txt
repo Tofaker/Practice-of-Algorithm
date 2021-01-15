@@ -1,0 +1,35 @@
+class MyStack<T>{       //建栈
+    public T[] elem;
+    public int usedSize;
+    public MyStack(){
+        this.elem = (T[])new Objects[5];
+    }
+
+
+    public void push(T item){   //压栈
+        if (isFull()){
+            throw new RuntimeException("满栈");
+        }
+        this.elem[this.usedSize] = item;
+        this.usedSize++;
+    }
+    public T pop(){     //出栈
+        if (isEmpty()){
+            throw new RuntimeException("空栈");
+        }
+        this.usedSize--;
+        return this.elem[this.usedSize-1];
+    }
+    public T peak(){        //读栈顶
+        if (isEmpty()){
+            throw new RuntimeException("空栈");
+        }
+        return this.elem[this.usedSize-1];
+    }
+    public boolean isFull(){
+        return this.usedSize == elem.length;
+    }
+    public boolean isEmpty(){
+        return this.usedSize == 0;
+    }
+}

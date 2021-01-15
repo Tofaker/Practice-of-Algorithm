@@ -1,0 +1,21 @@
+
+
+输出 1000 - 2000 之间所有的闰年
+
+除400无余数
+除100有余数 且除4无余数  为闰年
+
+
+public class demo1 {
+    public static void main(String[] args) {
+        int a=1000;
+        while(a<=2000){
+            if(a%400==0){
+                System.out.println(a);
+            }else if(a%100!=0 && a%4==0){
+                System.out.println(a);
+            }
+            a++;
+        }
+    }
+}

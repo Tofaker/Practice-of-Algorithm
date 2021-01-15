@@ -1,0 +1,18 @@
+最小公倍数是两个数字相乘除以最大公约数
+
+public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = a*b;
+        int tmp;
+        if (a < b){
+            tmp = a;a = b; b = tmp;
+        }
+        while (b != 0){
+            tmp = a % b;
+            a = b;
+            b = tmp;
+        }
+        System.out.println(c/a);
+    }

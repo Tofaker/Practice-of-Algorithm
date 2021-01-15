@@ -1,0 +1,59 @@
+请你仅使用两个栈实现先入先出队列。队列应当支持一般队列的支持的所有操作（push、pop、peek、empty）：
+
+实现 MyQueue 类：
+
+void push(int x) 将元素 x 推到队列的末尾
+int pop() 从队列的开头移除并返回元素
+int peek() 返回队列开头的元素
+boolean empty() 如果队列为空，返回 true ；否则，返回 false
+
+
+
+
+核心思想：全部压入s1后，s2压入s1弹出的所有的元素：相当于s2是s1 的相反顺序，
+
+
+
+class MyQueue {
+    public Stack<Integer> s1;
+    public Stack<Integer> s2;
+    public MyQueue(){
+        s1 = new Stack<>();
+        s2 = new Stack<>();
+    }
+
+    public void push (int x ){
+        s1.push(x);
+    }                       
+    public int pop(){               //核心思想，压入s1后，s2压入s1弹出的所有的元素：相当于s2是s1 的相反顺序，
+        if (s2.isEmpty()){                         // 则输出s2就达到了先进先出的效果
+            while (!s1.empty()){                            //分别处理一下各自情况
+                s2.push(s1.pop());
+            }
+        }
+        if (!s2.empty()){
+            return s2.pop();
+        }
+        return -1;
+    }
+    public int peek(){
+        if (s2.empty()){
+            while (!s1.empty()){
+                s2.push(s1.pop());
+            }
+        }
+        if (!s2.empty()){
+            return s2.peek();
+        }
+        return -1;
+    }
+    public boolean empty(){
+        if (s1.empty() && s2.empty()){
+            return true;
+        }
+        return false;
+    }
+}
+
+
+

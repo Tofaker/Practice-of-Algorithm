@@ -1,0 +1,41 @@
+
+
+思路：采用分组的方法
+
+
+/*希尔排序：
+    稳定性：不稳定排序
+    时间复杂度：O(n^1.3) - O(n^1.5)
+    空间复杂度：O(1)
+    * */
+
+
+
+//希尔排序：
+    public static void shellSort(int[] array){
+        int[] drr = {5,3,1};//素数
+        for (int i = 0; i < drr.length; i++) {
+            shell(array,drr[i]);
+        }
+    }
+    //shell交换
+    public static void shell(int[] array,int gap){
+        for (int i = gap; i < array.length; i++) {//i从gap开始走到数组尾
+            int tmp = array[i];//暂时存放tmp
+            int j = i-gap;  //arr[j]分组的第一个数，arr[i]为第二个数
+            for (;j >= 0; j = j-gap){//交换两组的值，大的放在后面，
+                if (array[j] > tmp){
+                    array[j+gap] = array[j];//大的放于arr[i]中       重要：完成后j=j-gap
+                }else {
+                    break;// 顺序正确直接退出
+                }
+            }
+            array[j+gap] = tmp;//tmp值放入，若进了for循环的if中，则j=j-gap
+                                //arr[j+gap]为数组的第一个数
+        }
+    }
+    /*希尔排序：
+    稳定性：不稳定排序
+    时间复杂度：O(n^1.3) - O(n^1.5)
+    空间复杂度：O(1)
+    * */

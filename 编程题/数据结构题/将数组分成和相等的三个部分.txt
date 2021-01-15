@@ -1,0 +1,32 @@
+
+
+
+给你一个整数数组 A，只有可以将其划分为三个和相等的非空部分时才返回 true，否则返回 false。
+
+
+
+
+
+class Solution {
+    public boolean canThreePartsEqualSum(int[] A) {
+        int sum = 0 ;
+        for (int i = 0; i <A.length ; i++) {
+            sum += A[i];
+        }
+        if(sum%3 != 0){ //不能分为三等份
+            return false;
+        }
+        //判断是否是等分
+        int aver = sum/3;//平均值
+        sum = 0;
+        int cnt = 0;		//cnt用来计次  必须大于等于三
+        for (int i = 0; i <A.length ; i++) {
+            sum+=A[i];
+            if (sum == aver){		//每次等于 平均值时让sum置零，
+                sum = 0;
+                cnt++;
+            }
+        }
+        return (sum == 0 && cnt>3) || (cnt == 3);   //cnt 
+    }
+}

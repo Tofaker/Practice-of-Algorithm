@@ -1,0 +1,51 @@
+
+
+
+
+
+
+
+
+
+//快速排序法  最快的算法
+//分而治之的思想 + 递归的思路
+
+
+    public static void quick1(int[] array,int low,int high){
+        if (low >= high) return;
+        int par = partion1(array,low,high);//基准 par
+        quick1(array,low,par-1);
+        quick1(array,par+1,high);
+    }
+
+        // par 划分
+    private static int partion1(int[] array, int start, int end) {
+        int tmp = array[start];
+        while (start < end){
+            while (start < end && array[end] >= tmp){
+                end--;
+            }
+            if (start >=end){
+                //array[start] = tmp;//start 和 end 相遇   tmp放回
+                break;
+            }else {     //array[end] < tmp 的情况 需要把end下标的值 给start
+                array[start] = array[end];
+            }
+            while (start < end && array[start] <= tmp){
+                start++;
+            }
+            if (start >= end){
+                //array[start] = tmp;//start 和 end 相遇   tmp放回
+                break;
+            }else {     //array[start] > tmp 的情况  需要把start下标的值给 end
+                array[end] = array[start];
+            }
+        }
+        array[start] = tmp;//start 和 end 相遇   tmp放回 因为分支中都会用到 ，所以提到后面
+        return start;   //此时start下标的值 是 分割值 左边全小于分割值 右边全大于分割值
+    }
+    /*
+      时间复杂度：O(k*n*logn) 一般k省略  最坏情况 O(n^2)
+      空间复杂度：O(logn)
+      稳定性：不稳定的排序
+     */

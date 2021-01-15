@@ -1,0 +1,15 @@
+
+
+create table teachers(
+name varchar(10),
+age int,
+height decimal(4,1),
+weight decimal(4,1),
+sex bit,
+education varchar(10),
+birthday varchar(10),
+idcard decimal(20)
+);
+insert into teachers values
+('zhangsan',20,70,170,1,'middle','1027',610326199911111111),
+('lisi',21,72,172,0,'university','1011',610326199911111111);

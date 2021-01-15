@@ -1,0 +1,44 @@
+//思路：//1、先把字符串转变为数组
+        //2、数组双向遍历并交换值
+        //3、数组转换为字符串
+
+//重点	str = String.copyValueOf(arr);//数组转为字符串
+		char[] arr = str.toCharArray();//字符串转为数组
+
+public static String reverse(String str) {
+        //1、先把字符串转变为数组
+        //2、数组双向遍历并交换值
+        //3、数组转换为字符串
+        char[] arr = str.toCharArray();
+        int i = 0;
+        int j = arr.length-1;
+        while (i<j){
+            char temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
+        str = String.copyValueOf(arr);
+        return str;
+    }
+
+
+
+//翻转指定 子字符串 
+// 思路同上
+
+public static String reverse2(String str,int i,int j) {
+        if(str == null) return null;
+        //1、先把字符串转变为数组
+        char[] array = str.toCharArray();
+        //2、开始逆置
+        while (i < j) {
+            char tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+        return String.copyValueOf(array);
+    }

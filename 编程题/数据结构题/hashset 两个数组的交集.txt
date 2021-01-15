@@ -1,0 +1,32 @@
+给定两个数组，编写一个函数来计算它们的交集。
+
+
+
+
+思路 	遍历数组1时用hash1集合1来存放数组1的数字(无重复)
+		遍历数组2时：hash2存放hash1已经包含的字符
+		以数组形式输出hashset内所有的字符
+
+
+
+
+	public int[] intersection(int[] nums1, int[] nums2) {
+        if (nums1 == null || nums2 == null) return null;
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+        for (int tmp:nums1) {
+            set1.add(tmp);
+        }
+        for (int tmp:nums2){
+            if (set1.contains(tmp)){
+                set2.add(tmp);
+            }
+        }
+        int[] arr = new int[set2.size()];
+        int start = 0;
+        for (int tmp:set2) {
+            arr[start] = tmp;
+            start++;
+        }
+        return arr;
+    }

@@ -1,0 +1,31 @@
+二叉树 问题：
+		最好采用子问题思路解题   便于递归
+
+
+		建立辅助函数 
+
+			数据处理
+
+			左子和右子  然后进行递归，
+
+			
+
+
+eg：
+
+
+class Solution {
+    List<Integer> list = new ArrayList<>();
+    public List<Integer> preorderTraversal(TreeNode root) {
+        help(root);
+        return list;
+    }
+
+    public void help(TreeNode root){
+        if (root != null){
+            list.add(root.val);
+            help(root.left);
+            help(root.right);
+        }
+    }
+}

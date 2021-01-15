@@ -1,0 +1,55 @@
+给定一个二叉树，确定它是否是一个完全二叉树。
+完全二叉树的定义如下：
+
+若设二叉树的深度为 h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数，第 h 层所有的结点都连续集中在最左边，这就是完全二叉树。
+
+链接：https://leetcode-cn.com/problems/check-completeness-of-a-binary-tree
+
+
+
+
+
+思路：
+
+	层序遍历，设置一个停止标志，遇到空节点，停止标志为真，如果停止标志为真，再遍历遇到非空节点，则非完全二叉树。
+
+
+
+	public boolean isCompleteTree(Node root) {
+        if (root == null) return true;
+        List<List<Integer>> lists = new LinkedList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        boolean stop = false;	//设置停止标志
+        while (!queue.isEmpty()){
+            List<Integer> list = new LinkedList<>();
+            int count = queue.size();
+            while (count != 0){
+                Node cur = queue.poll();
+                if (cur != null){
+                    list.add((int) cur.val);
+                    if (cur.left != null){
+                        if (stop){			
+                        //true 时则说明空节点后有非空节点，返回false
+                            return false;
+                        }
+                        queue.offer(cur.left);
+                    }else {
+                        stop = true;	//为空后设置为true
+                    }
+                    if (cur.right != null) {
+                        if (stop){
+                        //true 时则说明空节点后有非空节点，返回false
+                            return false;
+                        }
+                        queue.offer(cur.right);
+                    }else {
+                        stop = true;	//为空后设置为true
+                    }
+                }
+                count--;
+            }
+            lists.add(list);
+        }
+        return true;	//全部遍历完成后 符合完全二叉树  返回true
+    }

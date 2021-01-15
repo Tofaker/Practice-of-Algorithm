@@ -1,0 +1,52 @@
+
+
+
+
+
+
+
+
+	public void mergeSortNor(int[] array){
+        for (int i = 0; i < array.length; i *= 2) {//每次扩大2倍
+            mergeNor(array,i);
+        }
+    }
+    private void mergeNor(int[] array, int gap) {//完成操作
+        int len = array.length;
+        int s1 = 0,e1 = s1+gap-1;
+        int[] tmp = new int[len];
+        int k = 0;
+        int s2 = e1+1, e2 = s2+gap-1 < len ? s2+gap-1 : len-1;//e2位置特殊
+        //先判断是否有两个归并段
+        while (s2 < len){
+            while (s1 <= e1 && s2 <= e2){
+                if(array[s1] <= array[s2]){
+                    tmp[k] = array[s1];
+                    k++;s1++;
+                }else {
+                    tmp[k] = array[s2];
+                    k++;s2++;
+                }
+            }
+            while (s1 <= e1){
+                tmp[k] = array[s1];
+                k++;s1++;
+            }
+            while (s2 <= e2){
+                tmp[k] = array[s2];
+                k++;s2++;
+            }
+            //代码到此已经走完
+            //确定下次的值
+            s1 = e2+1;e1 = s1+gap-1;
+            s2 = e1+1;e2 = e2 = s2+gap-1 < len ? s2+gap-1 : len-1;
+        }
+        //s2超过了len 但s1没有超过  把s1的值全部拷贝
+        while (s1 <= len-1){
+            tmp[k] = array[s1];
+            k++;s1++;
+        }
+        for (int i = 0; i < array.length; i++) {
+            array[i] = tmp[i];
+        }
+    }

@@ -1,0 +1,58 @@
+
+
+
+采用大根堆，建立k个元素的大根堆(priorityQueue加入比较器、修改规则)
+		每次放入比堆顶小的元素， 最后就是最小的
+
+		细节处理： 	Queue<int[]> maxHeap = new PriorityQueue<>()
+
+					int[] tmp =new int[]{nums1[i],nums2[j]};
+
+					List<int[]> res = new LinkedList<>();
+
+					while (!maxHeap.isEmpty()){
+            			res.add(maxHeap.poll());
+        			}
+
+        			建立getsum函数
+
+
+
+
+给定两个以升序排列的整形数组 nums1 和 nums2, 以及一个整数 k。
+
+定义一对值 (u,v)，其中第一个元素来自 nums1，第二个元素来自 nums2。
+
+找到和最小的 k 对数字 (u1,v1), (u2,v2) ... (uk,vk)。
+
+https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/
+
+
+public class TestDemo5 {
+    public List<int[]> kSmallestpairs(int[] nums1,int[] nums2,int k){
+        Queue<int[]> maxHeap = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return getSum(o2)-getSum(o1);
+            }
+        });
+        for (int i = 0; i < nums1.length; i++) {
+            for (int j = 0; j < nums2.length; j++) {
+                int[] tmp =new int[]{nums1[i],nums2[j]};
+                if (maxHeap.size()<k) maxHeap.offer(tmp);
+                else if (getSum(tmp) < getSum(maxHeap.peek()) ){
+                    maxHeap.poll();
+                    maxHeap.offer(tmp);
+                }
+            }
+        }
+        List<int[]> res = new LinkedList<>();
+        while (!maxHeap.isEmpty()){
+            res.add(maxHeap.poll());
+        }
+        return res;
+    }
+    private int getSum(int[] arr) {
+        return arr[0]+arr[1];
+    }
+}

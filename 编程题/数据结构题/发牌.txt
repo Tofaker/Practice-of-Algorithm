@@ -1,0 +1,117 @@
+发牌：
+
+     	牌对象：花色和数字
+     		public int rank;//数字
+    		public String suit;
+
+     	一副牌对象（包含洗牌、交换牌位置）
+     			public String[] suits = {"❤","♣","♦","♠"};//花色
+			    public List<Card> buyDeck(){		
+			        List<Card> cards = new ArrayList<>();	//牌数组，里面存放数据
+			        for (int i = 0; i <4 ; i++) {
+			            for (int j = 1; j <=13 ; j++) {
+			                Card card = new Card(j,suits[i]);
+			                cards.add(card);
+			    洗牌：
+			    	for (int i = size-1; i >0 ; i--) {
+			            int j = new Random().nextInt(i);//
+			            swap(cards,i,j);//
+
+     	主函数：
+     		人对象数组List<List<Card>> hands = new ArrayList<>();
+     		人对象List<Card> hands1 = new ArrayList<>();
+     		人对象数组添加人对象：hands.add(hans1);
+     		发牌：fori(人数)
+     				forj(一个人几张牌)
+     					Card card = cardlist.remove(0)//每次拿第一张牌
+     					hands.get(i)add(card);	//hands.get(i)第一个人拿j张牌
+
+
+
+
+class Card{
+    public int rank;//数字
+    public String suit;
+
+    public Card(int rank, String suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+    @Override
+    public String toString() {
+        return "Card{" +
+                "rank=" + rank +
+                ", suit='" + suit + '\'' +
+                '}';
+    }
+}
+//创建一副牌
+class CardDemo{
+    public String[] suits = {"❤","♣","♦","♠"};
+    public List<Card> buyDeck(){
+        List<Card> cards = new ArrayList<>();
+        for (int i = 0; i <4 ; i++) {
+            for (int j = 1; j <=13 ; j++) {
+                Card card = new Card(j,suits[i]);
+               //因为随机数只能这样获取（0-i之间），所以for (int i = size-1; i >0 ; i--)
+                cards.add(card);
+            }
+        }
+        return cards;
+    }
+    public void shuffle(List<Card> cards) {
+        Random random = new Random();
+        int size = cards.size();
+        for (int i = size-1; i >0 ; i--) {
+            int j = new Random().nextInt(i);
+            swap(cards,i,j);
+        }
+    }
+
+    private void swap(List<Card> cards, int i, int j) {
+        Card tmp1 = cards.get(i);
+        Card tmp2 = cards.get(j);
+        cards.set(j,tmp1);
+        cards.set(i,tmp2);
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) {
+        CardDemo cardDemo = new CardDemo();
+        List<Card> cardList = cardDemo.buyDeck();
+        System.out.println(cardList);
+        System.out.println("======shuffle======");
+        cardDemo.shuffle(cardList);
+        System.out.println(cardList);
+        List<List<Card>> hands = new ArrayList<>();
+        List<Card> hands1 = new ArrayList<>();
+        List<Card> hands2 = new ArrayList<>();
+        List<Card> hands3 = new ArrayList<>();
+        hands.add(hands1);
+        hands.add(hands2);
+        hands.add(hands3);
+        for (int i = 0; i < 3 ; i++) {
+            for (int j = 0; j < 5 ; j++) {
+                Card cardTmp = cardList.remove(0);
+                hands.get(i).add(cardTmp);
+            }
+        }
+        System.out.println(hands1);
+        System.out.println(hands2);
+        System.out.println(hands3);
+        System.out.println(cardList);
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

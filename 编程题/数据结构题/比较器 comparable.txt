@@ -1,0 +1,26 @@
+
+
+存在于类的内部，一但写好，修改成本高
+
+
+
+
+
+class Card implements Comparable<Card> { //写在类的内部
+    //comparable<类型> 接口中 只有一个compareTo方法 并且需要重写
+    public int rank; // 数值
+    public String suit; // 花色
+
+    public Card(int rank, String suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+    
+    @Override
+    public int compareTo(Card o) {
+        return this.rank-o.rank;//依照牌号比较  返回差值
+        //返回值等于 0  相等
+        //返回值大于 0  谁调用compareTo谁就大
+        //返回值小于 0  谁调用compareTo谁就小
+    }
+}

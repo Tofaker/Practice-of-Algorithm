@@ -1,0 +1,23 @@
+
+
+
+
+给定一个二叉树，找出其最大深度。
+
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+
+
+
+public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+
+        
+        //return getHeight(root.left) > getHeight(root.right)? getHeight(root.left)+1 : getHeight(root.right)+1;
+        // 使用递归了两次 大量浪费空间
+
+        //大佬写法
+        return root == null ? 0 : Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+    }

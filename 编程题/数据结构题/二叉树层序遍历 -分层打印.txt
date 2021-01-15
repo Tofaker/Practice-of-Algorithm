@@ -1,0 +1,55 @@
+二叉树层序遍历  输出 分层的List
+
+	核心：层序打印中间   加一个   分层；
+
+		因为每次  queue 存放的刚好是 一层的所有元素，
+
+		所以利用 count = queue.size   和 count--  来进行输入一个List<Character> 内   
+		
+	框架：
+		while !queue.isEmpty()
+			...
+			while count != 0
+				...
+				count--;
+			//添加 到List<List<Character>> 内
+		//返回List<List<Character>>   内存的是 层序遍历的 分层的数据
+
+
+
+
+
+public List<List<Character>> levelOrder(Node root) {
+        List<List<Character>> ret = new ArrayList<>();
+        if(root == null) {
+            return null;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            List<Character> rowList = new ArrayList<>();
+            int count = queue.size();
+            while (count !=0){
+                Node cur = queue.poll();    //给一个暂时 中间储存
+                rowList.add(cur.val);
+                if (cur.left != null){
+                    queue.offer(cur.left);
+                }
+                if (cur.right != null){
+                    queue.offer(cur.right);
+                }
+                count--;
+            }
+            ret.add(rowList);
+        }
+        return ret;
+    }
+
+
+
+
+
+
+
+

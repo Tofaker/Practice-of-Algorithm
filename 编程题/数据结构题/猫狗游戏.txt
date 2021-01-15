@@ -1,0 +1,65 @@
+题目描述
+给定一个栈及一个操作序列int[][2] ope(C++中为vector<vector<int>>)，代表所进行的入栈出栈操作。第一个元素为1则入栈，第二个元素为数的正负号；第一个元素为2则出栈，第二个元素若为0则出最先入栈的那个数，为1则出最先入栈的正数，为-1则出最先入栈的负数。请按顺序返回出栈的序列，并做异常处理忽略错误操作。
+
+测试样例：
+[[1,1],[1,-1],[2,0],[2,-1]]
+返回：[1,-1]
+
+
+
+
+	核心：
+		借用辅助栈  分情况处理 情况  
+
+
+
+
+
+
+
+
+
+
+
+ArrayList<Integer> arrayList = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> tmp = new Stack<>();//辅助栈
+        for (int i = 0; i <ope.length ; i++) {
+            if (ope[i][0] == 1){        //第一个是1  ope[i][1] 压入栈
+                stack.push(ope[i][1]);
+            }else if (ope[i][0] == 2){      //第一个是2 弹出栈 并载入ArrayList中
+                if (stack.isEmpty()) continue;      //栈为空  跳出本次循环 继续循环
+                while (!stack.isEmpty()){   //栈不为空，借用辅助栈来倒一下数据
+                    tmp.push(stack.pop());
+                }
+                switch (ope[i][1]){     //  switch  分类处理   0  1  -1
+                    case 0:
+                        arrayList.add(tmp.pop());   //直接添加辅助栈的栈顶元素
+                        while (!tmp.isEmpty()){
+                            stack.push(tmp.pop());     //辅助栈全部导入stack栈
+                        }
+                        break;          //退出
+                    case 1:
+                        while (tmp.peek() <= 0)   //装数据时 <=0 先装
+                            stack.push(tmp.pop());
+                        if (tmp.peek()>0) arrayList.add(tmp.pop());; //第一个 >0 弹出
+                        while (!tmp.isEmpty()){       //装后面剩下的数据
+                            stack.push(tmp.pop());
+                        }
+                        break;
+                    case -1:
+                        while (tmp.peek() >= 0)   //装数据时 <=0 先装
+                            stack.push(tmp.pop());
+                        if (tmp.peek()<0) arrayList.add(tmp.pop());; //第一个 >0 弹出
+                        while (!tmp.isEmpty()){       //装后面剩下的数据
+                            stack.push(tmp.pop());
+                        }
+                        break;
+                    default:        //  [][] 第二个出现其他数值  抛出异常
+                        throw new RuntimeException("[][]内容错误");
+                }
+            }else {     //  [][] 第一个出现其他数值  抛出异常
+                throw new RuntimeException("[]内容错误");
+            }
+        }
+        return arrayList;

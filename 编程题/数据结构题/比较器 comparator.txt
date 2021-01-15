@@ -1,0 +1,60 @@
+
+
+写在类的外部，修改成本低
+
+
+
+常用格式：
+		Arrays.sort(people, new Comparator<Person>() {  //匿名内部类
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.age-o2.age;   //在使用时特别容易修改比较规则
+            }
+        });
+
+
+
+
+两种格式：
+
+public class TestDemo3 {
+    public static void main(String[] args) {
+        Person[] people = new Person[3];
+        people[0] = new Person("c",45,98);
+        people[1] = new Person("a",35,88);
+        people[2] = new Person("d",85,78);
+        for (int i = 0; i < people.length; i++) {
+            System.out.println(people[i]);
+        }
+        Arrays.sort(people, new Comparator<Person>() {  //匿名内部类
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.age-o2.age;   //在使用时特别容易修改比较规则
+            }
+        });
+
+        ScoreComparator scoreComparator = new ScoreComparator();//分数比较器对象
+        AgeComparator ageComparator = new AgeComparator();//年龄比较器对象
+        Arrays.sort(people,scoreComparator);//使用分数比较器
+        Arrays.sort(people,ageComparator);//使用年龄比较器
+        System.out.println("=========分割线========");
+
+        for (int i = 0; i < people.length; i++) {
+            System.out.println(people[i]);
+        }
+    }
+}
+class ScoreComparator implements Comparator<Person> {
+
+    @Override
+    public int compare(Person o1, Person o2) {
+        return o1.score-o2.score;
+    }
+}
+class AgeComparator implements Comparator<Person> {
+
+    @Override
+    public int compare(Person o1, Person o2) {
+        return o1.age-o2.age;
+    }
+}

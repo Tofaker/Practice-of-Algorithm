@@ -1,0 +1,40 @@
+给定两个字符串 s 和 t，判断它们是否是同构的。
+
+如果 s 中的字符可以被替换得到 t ，那么这两个字符串是同构的
+输入: s = "egg", t = "add"
+输出: true
+输入: s = "foo", t = "bar"
+输出: false
+输入: s = "paper", t = "title"
+输出: true
+
+
+
+通过创建 map 的k-v来解决   k存s的char  v存t的char
+
+	核心代码：	if (!map.containsKey(s.charAt(i))){
+                	if (map.containsKey(t.charAt(i))){
+                   		 return false;
+               		 }
+                	map.put(s.charAt(i),t.charAt(i));
+            		}else {
+                	if (map.get(s.charAt(i)) != t.charAt(i)) return false;
+            	}
+
+
+
+	static public boolean isIsomorphic(String s, String t) {
+        if (s.length() != t.length())return false;
+        HashMap<Character,Character> map = new HashMap<>();
+        for (int i = 0; i <s.length() ; i++) {
+            if (!map.containsKey(s.charAt(i))){
+                if (map.containsKey(t.charAt(i))){
+                    return false;
+                }
+                map.put(s.charAt(i),t.charAt(i));
+            }else {
+                if (map.get(s.charAt(i)) != t.charAt(i)) return false;
+            }
+        }
+        return true;
+    }

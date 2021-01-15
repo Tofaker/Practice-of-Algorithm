@@ -1,0 +1,29 @@
+
+//第一次出现的重复的数字
+
+
+思路：	循环 hashset存放key，
+		若hashset内有输出key并return
+
+
+
+
+
+//第一次出现的重复的数字
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < 10_0000; i++) {
+            int num = random.nextInt(1000);
+            list.add(num);
+        }
+        HashSet<Integer> set = new HashSet<>();
+        for (int i = 0; i < 100000; i++) {
+            if (set.contains(list.get(i))){
+                System.out.println(list.get(i));
+                return;
+            }else {
+                set.add(list.get(i));
+            }
+        }
+    }

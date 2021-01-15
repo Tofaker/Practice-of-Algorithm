@@ -1,0 +1,46 @@
+创建一个环形的  节点链  
+按照每两个删除一个处理，注意终止条件
+		while (cur.next != cur){//终止条件
+                cur.next.next = cur.next.next.next;//处理节点
+                cur = cur.next.next;//节点移动
+            }
+
+
+
+
+
+import java.util.*;
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+    }
+}
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextInt()){
+            int n = scanner.nextInt();
+            Node head = new Node(0);
+            Node cur = head;
+            if (n > 1000){
+                n = 1000;
+            }
+            for (int i = 1; i < n; i++) {
+                Node node = new Node(i);
+                cur.next = node;
+                cur = cur.next;
+            }
+            cur.next = head;
+            cur = head;
+            while (cur.next != cur){
+                cur.next.next = cur.next.next.next;
+                cur = cur.next.next;
+            }
+            System.out.println(cur.data);
+        }
+        
+    }
+}

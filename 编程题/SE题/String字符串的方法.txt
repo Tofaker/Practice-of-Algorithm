@@ -1,0 +1,40 @@
+
+
+
+
+string 方法：
+		charAt(int index) 返回指定索引的值
+		copyValueOf(char[] data,int offset, int count) 数组 返回 字符串
+		contains(char ch) 是否包含字符，返回布尔值
+		concat(string str) 拼接字符串，返回新字符串
+		equals(anobject) 字符串与 对象比较 返回布尔值
+		indexOf(int ch,[int fromIndex]) 返回字符第一次出现的索引
+				(String str,[int fromIndex]) 返回子字符串第一次出现的索引
+		isEmpty() 是否为空;
+		lastIndexOf(int ch,[int fromIndex]) 返回字符的最后一次出现的字符串中的索引
+		length() 返回长度
+		replace(char oldChar, char newChar) 新字符替换旧字符，返回字符串
+		replaceAll(String regex, String replacement) 新子字符串替换旧子字符串，返回字符串
+		//split(String regex, [int limit]) 切割字符串，返回字符数组
+		subSequence(int beginIndex, int endIndex)  返回一个字符数组，该数组是字符串的子字符串。
+		substring(int beginIndex, [int endIndex]) 返回字符串的子字符串
+		toCharArray() 字符串转为新的字符数组, 返回char[]
+		toLowerCase() ,toUpperCase()  返回大小写字符串，
+		toString() 返回 转变的字符串
+		trim() 删除所有空格，返回字符串
+		valueOf([int] [long] [object] [float][double] [char[]] [boolean] [char]) 接收 返回 字符串
+
+
+StringBuffer 方法：
+		append([boolean] [char] [char[]] [charsequence] [int] [float] [long] [obj] [string] [stringbuffer]) 尾插字符 返回StringBuffer
+		capacity() 返回当前容量。
+		charAt(int index) 返回 char在指定索引在这个序列值。
+		delete(int start, int end) 删除此序列的子字符串中的字符,返回StringBuffer
+		deleteCharAt(int index) 删除 char在这个序列中的指定位置。返回StringBuffer
+		insert() 某插入  返回StringBuffer
+		length() 返回长度
+		reverse() 翻转
+		replace(int start, int end, String str) 用指定的String中的字符替换此序列的子字符串中的 String 。
+		substring(int start, [int end]) 返回string
+		toString() 变为string类型 返回string
+		setCharAt(int index, char ch) 指定索引处的字符设置为 ch 。

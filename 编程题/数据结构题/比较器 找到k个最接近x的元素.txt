@@ -1,0 +1,48 @@
+给定一个排序好的数组，两个整数 k 和 x，从数组中找到最靠近 x（两数之差最小）的 k 个数。返回的结果必须要是按升序排好的。如果有两个数与 x 的差值一样，优先选择数值较小的那个数。
+
+
+链接：https://leetcode-cn.com/problems/find-k-closest-elements
+
+
+
+
+
+思路 ： 建立大根堆(修改比较器规则：与x的差值的大根堆)
+		每次放入元素进行比较：与x的差值的结果进行比较 
+		小于则 堆poll 堆offer(新元素)
+
+		最后大根堆放入的是差值最小的k个元素，再转为小根堆，然后给List输出
+
+
+
+
+
+
+class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        List<Integer> list = new LinkedList<>();
+        Queue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Math.abs(o2-x)-Math.abs(o1-x);
+            }
+        });
+        for (int i = 0; i < arr.length ; i++) {
+            if (i < k) {
+                queue.offer(arr[i]);
+            }
+            else if (Math.abs(arr[i]-x) < Math.abs(queue.peek()-x)){
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        Queue<Integer> queue1 = new PriorityQueue<>();
+        while (!queue.isEmpty()) {
+            queue1.offer(queue.poll());
+        }
+        while (!queue1.isEmpty()){
+            list.add(queue1.poll());
+        }
+        return list;
+    }
+}

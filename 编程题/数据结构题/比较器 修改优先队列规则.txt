@@ -1,0 +1,33 @@
+
+
+可以传入比较器规则来修改优先队列的排序标准：
+	优先队列放的不是对象(包括了多个属性)
+
+
+
+写法1：
+
+public class TestDemo4 {
+    public static void main(String[] args) {
+        AgeComp ageComp = new AgeComp();
+        PriorityQueue<Animal> priorityQueue = new PriorityQueue<>(ageComp);
+        priorityQueue.offer(new Animal("huahua",12));
+        priorityQueue.offer(new Animal("niania",13));
+    }
+}
+class AgeComp implements Comparator<Animal> {
+
+    @Override
+    public int compare(Animal o1, Animal o2) {
+        return o1.age-o2.age;
+    }
+}
+
+
+
+写法2：
+
+
+
+
+

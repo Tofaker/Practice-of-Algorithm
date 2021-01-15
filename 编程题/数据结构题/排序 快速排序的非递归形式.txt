@@ -1,0 +1,73 @@
+
+
+
+
+思路：切分数组左边放大的，右边放小的，用栈来储存指定每次切割的位置
+
+
+
+
+
+
+//非递归实现快速排序
+	public static void main(String[] args) {
+        int[] array = {12,5,9,34,22,55,44,11};
+        System.out.println(Arrays.toString(array));
+        quickSort(array);
+        System.out.println(Arrays.toString(array));
+
+    }
+    public static void quickSort(int[] array){
+        quickNor(array,0,array.length-1);
+    }
+    private static void quickNor(int[] array, int low, int high) {
+        Stack<Integer> stack = new Stack<>();
+        int start = 0;
+        int end = array.length-1;
+        int par = partion(array,low,high);  // 找出分界值
+        if (par > low+1){   //左边入栈
+            stack.push(start);
+            stack.push(par-1);
+        }
+        if (par < high-1){     //右边入栈
+            stack.push(par+1);
+            stack.push(end);
+        }
+        while (!stack.empty()){ //栈不为空 分段处理
+            end = stack.pop();
+            start = stack.pop();
+            par = partion(array,start,end);//par函数分割数组 左边全小于、右边全大于
+            if (par > start+1){
+                stack.push(start);
+                stack.push(par-1);
+            }
+            if (par < end-1){
+                stack.push(par+1);
+                stack.push(end);
+            }
+        }
+    }
+    // par 划分
+    private static int partion(int[] array, int start, int end) {
+        int tmp = array[start];
+        while (start < end){
+            while (start < end && array[end] >= tmp){
+                end--;
+            }
+            if (start >=end){
+                break;
+            }else {
+                array[start] = array[end];
+            }
+            while (start < end && array[start] <= tmp){
+                start++;
+            }
+            if (start >= end){
+                break;
+            }else {
+                array[end] = array[start];
+            }
+        }
+        array[start] = tmp;//start 和 end 相遇   tmp放回 因为分支中都会用到 ，所以提到后面
+        return start;   //此时start下标的值 是 分割值 左边全小于分割值 右边全大于分割值
+    }

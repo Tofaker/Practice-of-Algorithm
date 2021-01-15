@@ -1,0 +1,23 @@
+
+
+
+drop table article1;
+
+create table article1(
+
+title varchar(20),
+
+author varchar(20),
+
+create_date timestamp default now()
+
+);
+
+
+insert into article1 values
+
+('java核心技术','cay s.horstman','2019-09-09 12:12:00'),
+(null,'author2','2011-09-09 12:12:00'),
+('mql','author23','2011-09-09 12:12:00');
+
+select * from article1 where title is null or create_date>'2019-01-01 00:00:00';

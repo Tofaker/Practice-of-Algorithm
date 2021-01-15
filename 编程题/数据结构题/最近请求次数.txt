@@ -1,0 +1,49 @@
+写一个 RecentCounter 类来计算特定时间范围内最近的请求。
+
+请你实现 RecentCounter 类：
+
+RecentCounter() 初始化计数器，请求数为 0 。
+int ping(int t) 在时间 t 添加一个新请求，其中 t 表示以毫秒为单位的某个时间，并返回过去 3000 毫秒内发生的所有请求数（包括新请求）。确切地说，返回在 [t-3000, t] 内发生的请求数。
+保证每次对 ping 的调用都使用比之前更大的 t 值。
+
+链接：https://leetcode-cn.com/problems/number-of-recent-calls
+
+
+题目翻译：这道题说人话就是：t代表这个员工的工号，每次新员工t加入q公司前先把工号小于t -3000的老家伙都辞退，然后再让t入职，统计q公司现有几个员工。
+
+
+
+解题思路：
+利用队列(FIFO, 先进先出) 进行实现。题目说的是，在时间点 t 进行一次 ping 操作，加上之前在 [t-3000, t] 范围内的 ping 操作的次数，并将次数返回。
+例如，例子中第一次 ping 的 t = 1， 返回 1；
+第二次 ping 的 t = 100, 第一次 ping 的时间点 1 在本次允许范围 [100-3000, 100] 之内，所以返回2；
+第三次 ping 时，前两次的 ping 都在允许范围[3000-3000, 3000] 之内，所以返回 3；
+第四次 ping 时，第一次 ping 的 t = 1 不在允许范围[3002-3000, 3000] 之内，所以返回 3。
+利用队列先进先出的特点，移除当次 ping 操作不在允许范围内的时间点，剩下的队列内保存的都是允许范围内的时间点，最后返回队列的长度，即为当前时间点 t 所有允许范围内的 ping 操作次数。
+
+
+
+
+
+
+
+
+
+class RecentCounter {
+ArrayDeque<Integer> queue = new ArrayDeque<>();
+
+    public RecentCounter() {
+
+    }
+
+    public int ping(int t) {
+        while (!queue.isEmpty()){
+            int val = queue.peek();
+            if (val < t-3000){      //t-3000<  x < 3000
+                queue.pop();        //弹出队列
+            }else break;
+        }
+        queue.add(t);
+        return queue.size();
+    }
+}

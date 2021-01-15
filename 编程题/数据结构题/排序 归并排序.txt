@@ -1,0 +1,60 @@
+
+
+稳定性：稳定的排序是指数据在排序后，
+		两个相同键值的记录仍然保持原来的次序
+
+
+//归并排序
+        //核心：在于递归分解数据  +  合并有序数组  ：归并
+
+
+
+	/*
+    	时间复杂度：nlogn
+    	空间复杂度：O(n)
+    	稳定性：稳定的排序
+     */
+
+    public static void mergeSort(int[] array){
+        mergeSortInternal(array,0,array.length-1);
+    }
+    public static void mergeSortInternal(int[] array,int low,int high){
+        if (low >= high) return;
+        int mid = (low+high)/2;
+        mergeSortInternal(array,low,mid);//左分解
+        mergeSortInternal(array,mid+1,high);//右分解
+        merge(array,low,high,mid);//归并：合并两个有序的数组
+    }
+
+    private static void merge(int[] array, int low, int high, int mid) {
+        int s1 = low;
+        int s2 = mid+1;
+        int[] tmpArr = new int[high-low+1];
+        int k = 0;//tmpArr的下标
+
+        while (s1 <= mid && s2 <= high){    //代表两个字段都有数据
+            if (array[s1] <= array[s2]){
+                tmpArr[k] = array[s1];
+                k++;
+                s1++;
+            }else {
+                tmpArr[k] = array[s2];
+                k++;
+                s2++;
+            }
+        }
+        //第一个归并段 还有若干数据
+        while (s1 <= mid){
+            tmpArr[k++] = array[s1++];
+        }
+        //第二个归并段 还有若干数据
+        while (s2 <= high){
+            tmpArr[k++] = array[s2++];
+        }
+        //归并段所有数据都拷贝完成
+        //也就是说tmpArr存放的是归并后的有序结果
+        for (int i = 0; i < tmpArr.length; i++) {
+            array[low+i] = tmpArr[i];  //low+i 为调整被拷贝数组的位置
+        }
+    }
+    

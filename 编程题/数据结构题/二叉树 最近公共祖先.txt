@@ -1,0 +1,37 @@
+给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+
+最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+
+链接：https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree
+
+
+思路：
+	1. root =null  返回null
+	2. root 是p或q  返回root
+    3. 调用递归
+	4. 左节点和右节点下各有一个  返回root
+	5. 全部存于左节点  返回左节点 (同理返回右节点)	
+	6. 左右都没有  返回null
+
+
+
+
+
+
+
+public Node help(Node root, Node p, Node q){
+        if (root == null)return null;	//根节点为null 返回null
+
+        if (root == p || root == q)return root;		//root为 p或q  直接返回 root
+
+        Node left = help(root.left,p,q);		//递归 root 的左节点下  全部递归
+        Node right = help(root.right,p,q);		//递归 root 的右节点下  全部递归
+
+        if (left != null && right !=null) return root;		// 左节点下和右节点下 各有一个 返回root
+
+        if (left != null) return left;			//左节点 下存在两个 返回左节点  此时注意 返回的是公共节点（递归返回的公共节点），而不是root的左节点
+
+        if (right != null) return right;		//右节点 下存在两个 返回右节点  此时注意 返回的是公共节点（递归返回的公共节点），而不是root的右节点
+
+        return null;		//两个里面都没有 返回null
+    }

@@ -1,0 +1,60 @@
+
+
+优先队列 是 小根堆
+
+建堆   初始化堆（小根堆顺序）
+
+
+
+
+
+public class TestDemo {
+    public static void main(String[] args) {
+        int[] array = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22};
+        TestHeap testHeap = new TestHeap();//建堆
+        testHeap.initHeap(array);
+        System.out.println("========");
+    }
+}
+
+class TestHeap{
+    public int[] elem;
+    public int usedSize;
+    public TestHeap() {
+        this.elem = new int[22];
+    }
+
+    //初始化堆  PriorityQueue 优先队列  小根堆
+    public void initHeap(int[] array){
+        for (int i = 0; i < array.length ; i++) {
+            this.elem[i] = array[i];
+            this.usedSize++;
+        }
+        //建堆的时间复杂度 是 O(n*log 2 n)
+        for (int i = (this.usedSize-1-1)/2; i >=0 ;i--){    //从最底层开始
+            adjustDown(i,usedSize);
+        }
+        System.out.println("=======");
+    }
+
+    public void adjustDown(int parent,int len){
+        int child = 2*parent+1;
+        //判断是否有左孩子
+        while (child < len){
+            //是否有右孩子 若有 child保存左右孩子最大值的下标
+            if (child+1 <len && elem[child] < elem[child+1]){
+                child++;
+            }
+            if (elem[child] > elem[parent]){//child 存储的是最大值下标
+                int tmp = elem[child];
+                this.elem[child] = this.elem[parent];
+                this.elem[parent] = tmp;
+                parent = child;
+                child = 2*parent+1;
+            }else {
+                break;
+            }
+
+        }
+    }
+    

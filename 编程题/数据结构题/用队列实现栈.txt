@@ -1,0 +1,49 @@
+使用队列实现栈的下列操作：
+
+push(x) -- 元素 x 入栈  
+pop() -- 移除栈顶元素
+top() -- 获取栈顶元素
+empty() -- 返回栈是否为空
+
+
+
+思路：双队列实现：
+	压入
+		建两个空列
+		核心:(相当于翻转)
+		给一个值，压入a，再把b(尾删)的值压入(a头插)
+		交换 a b 
+		输出b列  b实际值(存储顺序) 与输入的相反
+
+		输入  1 2 3 4   b： 1234
+	压出：队列输出
+		尾删
+		输出: 4 3 2 1
+
+
+class MyStack1{
+    private Queue<Integer> a;
+    private Queue<Integer> b;
+    public MyStack1(){
+        a = new LinkedList<>();
+        b = new LinkedList<>();
+    }
+    public void push(int x ){
+        a.offer(x);
+        while (!b.isEmpty()){
+            a.offer(b.poll());
+        }
+        Queue tmp = b;
+        b = a;
+        a = tmp;
+    }
+    public int pop(){
+        return b.poll();
+    }
+    public int top(){
+        return b.peek();
+    }
+    public boolean empty(){
+        return b.isEmpty();
+    }
+}

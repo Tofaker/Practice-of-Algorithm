@@ -1,0 +1,19 @@
+create table tushubiao(
+
+name varchar(20),
+
+author varchar(20),
+
+price decimal(4,2),
+
+type varchar(20)
+
+);
+
+
+
+insert into tushubiao values
+
+('java核心技术','cay s.horstman',56.43,'计算机技术'),
+
+('book2','author2',16,'study');

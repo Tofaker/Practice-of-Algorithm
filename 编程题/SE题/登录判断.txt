@@ -1,0 +1,67 @@
+
+思路：
+
+//输入的账号和密码是否与储存的相同，不同则抛出异常
+//1、接收键盘输入，存储到数组
+//2、进行核对 抛出异常 2个异常 一个是账号异常 一个是密码异常
+
+
+//   主函数方法  声明异常类  
+
+//   try 执行传参 传给方法    核心是方法
+
+//   捕捉异常 并打印：
+        catch (MyException1 e){
+                    e.printStackTrace();
+                }
+
+
+
+//核心重点：    自定义抛出异常方法：
+
+//   1、新异常类继承 Exception，构造这个新类
+//   2、写核对名字和密码两个方法  方法后声明异常类
+//   3、对比失败后 抛出匿名对象（new实例化 异常类） 
+
+
+
+class MyException1 extends Exception{
+    public MyException1(String message){
+        super(message);
+    }
+}
+
+public class login {
+    public static void checkname(String name,String username) throws MyException1{
+        if (!name.equals(username)) {
+            System.out.println("登录失败");
+            throw new MyException1("用户名不正确");
+        }
+    }
+    public static void checkpassword(String password,String userpassword) throws MyException1{
+        if (!password.equals(userpassword)) {
+            System.out.println("登录失败");
+            throw new MyException1("密码不正确");
+        }
+    }
+    public static void main(String[] args) throws MyException1 {
+        System.out.println("请输入用户名");
+        Scanner scan1 = new Scanner(System.in);
+        String name = scan1.nextLine();
+        System.out.println("请输入密码");
+        Scanner scan2 = new Scanner(System.in);
+        String password = scan1.nextLine();
+        String[] user1 = {"1", "wangmazi"};
+
+
+        try{
+            checkname(name,user1[0]);
+            //使用方法进行核对：方法声明了异常 和抛出异常
+            checkpassword(password,user1[1]);
+            //使用方法进行核对：方法声明了异常 和抛出异常
+            System.out.println("登录成功");
+        }catch (MyException1 e){
+            e.printStackTrace();
+        }
+    }
+}
