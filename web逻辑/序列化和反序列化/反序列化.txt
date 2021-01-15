@@ -1,0 +1,13 @@
+public class Main {
+    public static void main(String[] args) throws JsonProcessingException {
+        String s = "{\n" +
+                "    \"id\": 1,\n" +
+                "    \"who\": \"达摩老祖\",\n" +
+                "    \"when\": \"2020-12-09 10:34:07\",\n" +
+                "    \"what\": \"快去休闲\"\n" +
+                "  }";
+        ObjectMapper mapper = new ObjectMapper();
+        Message message = mapper.readValue(s, Message.class);
+        System.out.println(message);
+    }
+}

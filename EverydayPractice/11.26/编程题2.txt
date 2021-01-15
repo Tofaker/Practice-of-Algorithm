@@ -1,0 +1,26 @@
+public static void hanshu() {
+        Scanner scanner = new Scanner(System.in);
+        HashMap<Integer,String> hashMap = new HashMap<>();
+        String str = scanner.nextLine();
+        for (int i = 0; i < str.length(); i++) {
+            int j = i;
+            while ('0' <=str.charAt(j) && '9' >= str.charAt(j)){
+                j++;
+                if (j >= str.length()){
+                    break;
+                }
+            }
+            if (j > i){
+                hashMap.put(j-i,str.substring(i,j));
+                i = j;
+            }
+        }
+        int max = 0;
+        if (hashMap.size() == 0) return;
+        for (int tmp:hashMap.keySet()) {
+            if (tmp > max){
+                max = tmp;
+            }
+        }
+        System.out.println(hashMap.get(max).toString());
+    }

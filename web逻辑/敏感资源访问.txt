@@ -1,0 +1,28 @@
+
+
+
+@WebServlet("/sen")
+public class SensitiveServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");//响应头 content-type 告诉对端响应体的结息方式
+
+        PrintWriter pw = resp.getWriter();
+        HttpSession session = req.getSession(false);
+        if (session == null){//用户没有登陆
+            resp.setStatus(401);
+            pw.println("没有登陆不允许访问");
+        }else {
+            /*User user = (User) session.getAttribute()
+            if(user.允许访问的资源不包含当前访问的服务路径){
+                resp.setStauts(403);
+                pw.println("没有权限，禁止访问")
+            }else
+
+            * */
+            pw.println("访问成功");
+        }
+    }
+}

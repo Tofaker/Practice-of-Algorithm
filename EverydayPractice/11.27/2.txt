@@ -1,0 +1,21 @@
+public class DayPractice {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        int[] arr = new int[]{0, 0};
+        while (scanner.hasNextInt()) {
+            int tmp = scanner.nextInt();
+            if (!hashMap.containsKey(tmp)) {
+                hashMap.put(tmp, 1);
+            } else {
+                int val = hashMap.get(tmp);
+                hashMap.put(tmp, val + 1);
+                if (arr[1] < val + 1) {
+                    arr[0] = tmp;
+                    arr[1] = val + 1;
+                }
+            }
+        }
+        System.out.println(arr[0]);
+    }
+}

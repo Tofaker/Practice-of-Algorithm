@@ -1,0 +1,46 @@
+被测试代码
+
+public class JSONUtil {
+    //jackson框架中，对json字符串和java对象之间互相转换的类
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    /*序列化：把java对象序列化为json字符串
+    o：java对象
+    json：字符串
+    * */
+    public static String serialize(Object o){
+        try {
+            return MAPPER.writeValueAsString(o);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("java对象序列化为JSON字符串时出错"+o);
+        }
+    }
+}
+
+单元测试代码对应要有单元测试文件
+测试代码：
+class Person{
+    String name ;
+    int age ;
+    int money ;
+
+    public Person(String name, int age, int money) {
+        this.name = name;
+        this.age = age;
+        this.money = money;
+    }
+}
+public class JSONUtilTest {
+    @Test//junit单元测试的注解需要写在public void方法内
+    public void testSerialize(){
+        Person dengziqi = new Person("凳子齐",18,100000000);
+        Person ziji = new Person("程序员",25,1);
+        Map<Integer,Person> map = new HashMap<Integer, Person>();
+        map.put(1,dengziqi);
+        map.put(2,ziji);
+        String json = JSONUtil.serialize(map);
+        System.out.println(json);
+        Assert.assertNotNull(json);
+    }
+}

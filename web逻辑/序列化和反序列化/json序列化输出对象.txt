@@ -1,0 +1,41 @@
+@WebServlet("/message-list")
+public class MessageListServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Message> messageList = getMessageList();
+        String jsonMessage = buildJSONByJackson(messageList);
+        System.out.println(jsonMessage);
+    }
+
+    private String buildJSONByJackson(List<Message> messageList) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(messageList);
+        } catch (JsonProcessingException e) {
+            return "";
+        }
+    }
+
+    private List<Message> getMessageList() {
+        List<Message> messageList = new ArrayList<>();
+        Message m1 = new Message();
+        m1.id = 1;
+        m1.who = "damolaozu";
+        messageList.add(m1);
+        Message m2 = new Message();
+        m2.id = 2;
+        m2.who = "葫芦娃2号";
+        messageList.add(m2);
+        Message m3 = new Message();
+        m3.id = 3;
+        m3.who = "葫芦娃3号";
+        messageList.add(m3);
+        return messageList;
+    }
+}
+class Message {
+    public int id;
+    public String who;
+    public String when;
+    public String what;
+}

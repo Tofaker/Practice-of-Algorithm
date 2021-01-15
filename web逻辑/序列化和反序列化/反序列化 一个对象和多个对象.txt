@@ -1,0 +1,43 @@
+
+
+public class Main {
+
+//多个对象反序列化
+ 
+    public static void main(String[] args) throws JsonProcessingException {
+        /*
+        String s = "[\n" +
+                "  {\n" +
+                "    \"id\": 1,\n" +
+                "    \"who\": \"达摩老祖\",\n" +
+                "    \"when\": \"2020-12-09 10:34:07\",\n" +
+                "    \"what\": \"快去休闲\"\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"id\": 2,\n" +
+                "    \"who\": \"达摩老祖2\",\n" +
+                "    \"when\": \"2020-12-08 10:34:07\",\n" +
+                "    \"what\": \"快去休闲吧\"\n" +
+                "  }\n" +
+                "]";
+
+        ObjectMapper mapper = new ObjectMapper();
+        JavaType type = mapper.getTypeFactory().constructParametricType(List.class, Message.class);
+        List<Message> messageList = mapper.readValue(s, type);
+        System.out.println(messageList);
+
+         */
+
+
+//单个对象反序列化
+        String s = "{\n" +
+                "    \"id\": 1,\n" +
+                "    \"who\": \"达摩老祖\",\n" +
+                "    \"when\": \"2020-12-09 10:34:07\",\n" +
+                "    \"what\": \"快去休闲\"\n" +
+                "  }";
+        ObjectMapper mapper = new ObjectMapper();
+        Message message = mapper.readValue(s, Message.class);
+        System.out.println(message);
+    }
+}
