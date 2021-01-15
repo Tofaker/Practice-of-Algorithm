@@ -1,0 +1,38 @@
+1.生成随机数 Random r =new Random(1);
+2.循环键入  while (scan.hasNextInt()) {
+            int num = scan.nextInt();
+            ...进行比较（内含break）
+            }
+
+
+
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User: madala
+ * Date: 2020-10-31;   Time: 21:46
+ */
+public class demo1 {
+    public static void main(String[] args) {
+        Random r =new Random(1);
+        int s=r.nextInt(100);
+        System.out.println("请输入数字");
+        Scanner scan = new Scanner(System.in);
+
+
+        while (scan.hasNextInt()) {
+            int num = scan.nextInt();
+            if (num < s) {
+                System.out.println("小于随机数");
+            } else if (num == s) {
+                System.out.println("等于随机数");
+                break;
+            } else {
+                System.out.println("大于随机数");
+            }
+        }
+    }
+}

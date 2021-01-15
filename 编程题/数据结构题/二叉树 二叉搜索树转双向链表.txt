@@ -1,0 +1,40 @@
+二叉搜索树 ：根的左比根小  根的右比根大
+
+
+	思路：	利用中序遍历   
+
+			改变中序遍历的  中心代码(修改指向) 
+			 
+			修改完后为双向链表，找到链表的头结点 ，返回头结点 
+
+
+
+
+
+
+
+
+public Node prev = null;
+    public void convert(Node root){
+        if (root == null)return;
+        convert(root.left);
+
+
+        root.left = prev;   //双端  指向前
+        if (prev != null){
+            prev.right = root;  //双端  指向后
+        }
+        prev = root;    //更换prev
+
+
+        convert(root.right);
+    }
+    public Node Convert(Node root){
+        if (root == null)return null;
+        convert(root);      //形成双端队列 但是没有返回值 对外暴露 root根节点
+        Node head = root;
+        while (head.left != null){
+            head = head.left;
+        }
+        return head;
+    }

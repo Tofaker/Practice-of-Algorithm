@@ -1,0 +1,51 @@
+你需要采用前序遍历的方式，将一个二叉树转换成一个由括号和整数组成的字符串。
+
+空节点则用一对空括号 "()" 表示。而且你需要省略所有不影响字符串与原始二叉树之间的一对一映射关系的空括号对。
+
+链接：https://leetcode-cn.com/problems/construct-string-from-binary-tree
+
+
+
+思路：借助辅助函数   以前序遍历的方法走  ，但要进行过程处理
+
+
+
+
+public static void help(Node t, StringBuilder sb){
+        if ( t== null) return;
+        sb.append(t.val);
+        //以前序遍历的方法走   但是要进行过程处理：左为空时 处理  左不为空时 处理
+                                            //右为空时 处理  右不为空时  处理
+                //help(t.left,sb);
+                //help(t.right,sb);
+
+        //help(t.left,sb);  //左为空时 处理  左不为空时 处理
+        if (t.left == null){
+            if (t.right == null){
+                return;
+            } else{
+                sb.append("()");
+            }
+        }else {
+            sb.append("(");
+            help(t.left,sb);
+            sb.append(")");
+        }
+        
+        //help(t.right,sb); //右为空时 处理  右不为空时  处理
+        if (t.right == null){
+            return;
+        }else {
+            sb.append("(");
+            help(t.right,sb);
+            sb.append(")");
+        }
+
+        
+    }
+    public static String main(Node t) {
+       if (t == null)return null;
+       StringBuilder sb = new StringBuilder();
+       help(t,sb);
+       return sb.toString();
+    }

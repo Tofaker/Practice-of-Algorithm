@@ -1,0 +1,50 @@
+自幂数：是指一个 n 位数，它的每个位上的数字的 n 次幂之和等于它本身
+
+1.求位数 除10 计数
+2.求每一位的计数次方
+			while (tmp != 0) {	
+				sum += Math.pow(tmp%10,count);
+                tmp /= 10
+            }
+
+
+
+
+
+
+
+public static void main10(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();//9999  9999999
+        for (int i = 1; i < n; i++) {
+            //1、求当前的i是几位数
+            int count = 0;
+            int tmp = i;
+            while (tmp != 0) {
+                count++;//1 2   3
+                tmp = tmp/10;//12  1   0
+            }
+            //此时count已经知道是几位数了
+            //2、求i的每一位,相当于求tmp的每一位
+            tmp = i;//123
+            int sum = 0;
+            while (tmp != 0) {
+                //3^3
+                sum += Math.pow(tmp%10,count);
+                tmp /= 10;//123/10=12
+            }
+            if(sum == i) {
+                System.out.println(i+"是自幂数");
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+

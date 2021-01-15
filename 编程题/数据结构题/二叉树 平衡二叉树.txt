@@ -1,0 +1,36 @@
+
+给定一个二叉树，判断它是否是高度平衡的二叉树。
+
+本题中，一棵高度平衡二叉树定义为：
+
+一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。
+
+
+核心： 子问题思路：
+
+			左子的最大深度 与 右子的最大深度 之差小于1
+			递归：
+				左子平衡  右子平衡
+
+
+
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+       if(root == null) return true;
+        int leftHeight = maxDepth(root.left);
+        int rightHeight = maxDepth(root.right);
+        return Math.abs(leftHeight-rightHeight) < 2 && isBalanced(root.left) && isBalanced(root.right);
+        
+    }
+
+    public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
+
+        int leftHeight = maxDepth(root.left);
+        int rightHeight = maxDepth(root.right);
+
+        return leftHeight > rightHeight ?
+                leftHeight+1 : rightHeight+1;
+    }
+    
+}

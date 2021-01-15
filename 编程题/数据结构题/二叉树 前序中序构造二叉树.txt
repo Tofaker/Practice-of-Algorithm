@@ -1,0 +1,50 @@
+根据一棵树的前序遍历与中序遍历构造二叉树。
+
+思路 ：
+		前序 主要是根节点在前 可以用来 以此的元素作为节点来分别在中序遍历中来分别分组分为左右，然后进行建立新的节点并建立连接
+
+
+
+
+
+
+
+	//主函数
+	public Node buildTree(char[] preoder,char[] inorder){
+
+        if (preoder == null || inorder == null)return null;		//空就返回空
+        if (preoder.length == 0 || inorder.length == 0)return null;		//不为空但长度为0 返回空
+        return help1(preoder,inorder,0,inorder.length-1);	//调用辅助函数(内含递归)  返回建好的二叉树的根节点
+    }
+
+
+    public int preIndex = 0;	//因为在 中序遍历中需要对索引后移 所以设置全局变量，(辅助函数内设置，每次递归时会出现值的重置)
+
+    //辅助函数
+    public Node help1(char[] preoder, char[] inoder, int inbegin, int inend){
+    		//辅助函数接收：前序数组、中序数组、中序数组开始索引、中序数组结束索引
+
+        if (inbegin>inend)return null;	//中序中索引值发生前大于后 则说明已经处理完成 返回null 
+        Node root = new Node(preoder[preIndex]);	//建立节点 前序遍历 索引的值设置为val
+        int inorderIndex = findInorderIndexOfRoot(inoder,inbegin,inend,preoder[preIndex]);		//找出前序索引值在中序数组的索引，
+        preIndex++;		// 前序索引当前节点已经建立，所以前序索引后移
+
+
+        //核心 ：递归建立子树
+
+        左调用辅助函数 传入 前序数组、中序数组、中序数组开始索引、中序数组结束索引(此时已将中序数组分为两段，左传入的是分段后的前一段 inbegin到inorderIndex-1，右调用传入的是中序分段后的后一段 inorderIndex+1到inend)
+        root.left = help1(preoder,inoder, inbegin,inorderIndex-1);//递归建立左子节点 建立左子节点.....
+        root.right =help1(preoder,inoder,inorderIndex+1,inend);	//递归建立右子节点 建立右子节点.....
+        
+        return root;	//返回root (根节点)
+    }
+
+    //辅助函数二  将中序分开，返回分开点的索引
+    public static int findInorderIndexOfRoot(char[] inorder,int inbegin,int inend,char val){
+        for (int i = inbegin; i <= inend ; i++) {
+            if (inorder[i] == val){
+                return i;
+            }
+        }
+        return -1;
+    }

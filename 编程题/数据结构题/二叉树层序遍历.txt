@@ -1,0 +1,31 @@
+
+
+层序遍历二叉树   
+		
+		核心：采用队列 
+
+
+
+
+
+
+
+public void levelOrderTraversal(Node root) {
+
+        if(root == null) {
+            return;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            Node cur = queue.poll();    //给一个暂时 中间储存
+            System.out.println(cur.val+" ");
+            if (cur.left != null) {
+                queue.offer(cur.left);
+            }
+            if (cur.right != null) {
+                queue.offer(cur.right);
+            }
+    	}
+   	}

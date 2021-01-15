@@ -1,0 +1,19 @@
+
+
+
+
+方法名 相同
+参数列表不同（个数和类型不同）
+返回值不要求
+
+
+
+	public static int add(int a,int b) {
+	        int ret = a+b;
+	        return ret;
+	    }
+
+    public static double add(double a,double b) {
+        double ret = a+b;
+        return ret;
+    }

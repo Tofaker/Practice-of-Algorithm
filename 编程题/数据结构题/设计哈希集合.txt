@@ -1,0 +1,85 @@
+不使用任何内建的哈希表库设计一个哈希集合
+add(value)：向哈希集合中插入一个值。
+contains(value) ：返回哈希集合中是否存在这个值。
+remove(value)：将给定值从哈希集合中删除。如果哈希集合中没有这个值，什么也不做。
+https://leetcode-cn.com/problems/design-hashset/
+
+
+
+Node类的建立、初始化、哈希码的获取、add、remove
+
+
+
+
+
+
+class MyHashSet {
+    class Node{
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+            this.next = null;
+        }
+
+    }
+    private Node[] array;	//Node数组
+    public MyHashSet() {
+        array = new Node[2069];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = new Node(0);//初始化
+        }
+    }
+
+    public void add(int value) {
+        //1.寻找哈希码位置
+        int hashCode = getHashCode(value);
+        Node p = array[hashCode].next;
+        //2.哈希码位置的链表是否有此元素
+        while (p != null){
+            if (p.value == value){
+                return;//有元素，退出
+            }
+            p = p.next;
+        }
+        //2.头插法插入
+        if ( p == null ){
+            Node tmp = new Node(value);
+            tmp.next = array[hashCode].next;
+            array[hashCode].next = tmp;
+        }
+    }
+
+    private int getHashCode(int value) {
+        return value % 2069;
+    }
+
+    public void remove(int value) {
+        int hashCode = getHashCode(value);
+        Node p = array[hashCode].next;
+        Node pre = array[hashCode];
+        while (p != null){
+            if (p.value == value){
+                pre.next = p.next;
+                p = pre.next;
+                return;
+            }
+            pre = p;
+            p= p.next;
+        }
+    }
+
+    /** Returns true if this set contains the specified element */
+    public boolean contains(int value) {
+        int hashCode = getHashCode(value);
+        Node p = array[hashCode].next;
+        while (p != null){
+            if (p.value == value){
+                return true;
+            }
+            p = p.next;
+        }
+        return false;
+    }
+}

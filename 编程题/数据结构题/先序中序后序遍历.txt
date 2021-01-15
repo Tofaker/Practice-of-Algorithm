@@ -1,0 +1,117 @@
+
+建节点：
+class  Node {
+    public char val;
+    public Node left;
+    public Node right;
+    public Node(char val) {
+        this.val = val;
+    }
+}
+
+建二叉树
+
+public class BinaryTree {
+    public Node creatTree(){
+        Node A = new Node('a');
+        Node B = new Node('b');
+        Node C = new Node('c');
+        Node D = new Node('d');
+        Node E = new Node('e');
+        Node F = new Node('f');
+        Node G = new Node('g');
+        Node H = new Node('h');
+        //造树
+        A.left = B ; A.right = C;
+        B.left = D ; B.right = E;
+        E.right = H ;
+        C.left = F ;
+        C.right = G;
+        return A;
+    }
+
+遍历
+
+    // 前序遍历
+    void preOrderTraversal(Node root){
+        if (root == null) return;
+        System.out.println(root.val);
+        preOrderTraversal(root.left);
+        preOrderTraversal(root.right);
+    }
+    // 中序遍历
+    void inOrderTraversal(Node root) {
+        if (root == null) return;
+        preOrderTraversal(root.left);
+        System.out.println(root.val);
+        preOrderTraversal(root.right);
+    }
+    // 后序遍历
+    void postOrderTraversal(Node root) {
+        if (root == null) return;
+        preOrderTraversal(root.left);
+        preOrderTraversal(root.right);
+        System.out.println(root.val);
+    }
+
+常规方法：
+
+	// 求结点个数：1遍历思路
+    static int size = 0;
+    void getSize1(Node root){
+        if (root == null) return;
+        size++;
+        getSize1(root.left);
+        getSize1(root.right);
+    }
+    // 求结点个数:2子问题思路
+    int getSize2(Node root){
+        if (root == null) return size;
+        return getSize2(root.left)+getSize2(root.right)+1;
+    }
+
+
+    // 求叶子结点个数：1 遍历思路
+    static int leafSize = 0;
+    void getLeafSize1(Node root) {
+        if (root == null) return ;//无子节点
+
+        if (root.left == null && root.right == null) {
+            leafSize++ ;//左右为空  ++   叶子节点计数一次
+        }
+        getLeafSize1(root.left);//遍左子树
+        getLeafSize1(root.right);//遍右子树
+
+    }
+    // 求叶子结点个数 2 子问题思路
+    int getLeafSize2(Node root) {
+        //终止条件
+        if (root == null) return 0;	//没有子节点
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        // 核心  递归  求和
+        return getLeafSize2(root.left)+getLeafSize2(root.right);
+    }
+
+    
+    // 子问题思路-求第 k 层结点个数
+    int getKLevelSize(Node root,int k) {
+        if(root == null) return 0;
+        if (k == 1){
+            return 1;
+        }
+        return getKLevelSize(root.left,k-1)+getKLevelSize(root.right,k-1);
+    }
+
+
+
+
+
+
+
+
+
+
+
+

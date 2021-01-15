@@ -1,0 +1,31 @@
+
+
+
+
+
+/*时间复杂度：O(n^2)
+    空间复杂度：O(1)
+    稳定性：不稳定的排序
+    * */
+
+
+
+
+
+
+//选择排序:第一次取最小的放第一个位置，第二次取最小的放第二个位置...依次全部取一遍
+    public static void selectSort(int[] array){
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < array.length ; i++) {
+            for (int j = i+1; j < array.length ; j++) {
+                if (array[i] > array[j]){
+                    int tmp = array[i];
+                    array[i] = array[j];
+                    array[j] = tmp;
+                }
+            }
+        }
+        long end = System.currentTimeMillis();
+        System.out.println(end-start);
+    }
+    

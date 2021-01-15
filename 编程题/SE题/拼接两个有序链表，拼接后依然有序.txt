@@ -1,0 +1,32 @@
+
+思路：新建一个链表
+	分别遍历链表a和b，
+	比大小 ，大的给新建的链表 再后移 再比较。。。。。
+
+
+
+
+
+public static Node1 mergeTwoLists(Node1 headA,Node1 headB){
+        Node1 newHead = new Node1(-1);
+        Node1 tmp = newHead;
+        while (headA != null && headB != null){
+            if (headA.data > headB.data){
+                tmp.Next = headA;
+                tmp = tmp.Next;
+                headA = headA.Next;
+            }else {
+                tmp.Next = headB;
+                tmp = tmp.Next;
+                headB = headB.Next;
+            }
+            if (headA == null){
+                tmp.Next = headB;
+            }else (headB == null){
+                tmp.Next = headA;
+            }
+        }
+        return newHead;
+    }
+
+

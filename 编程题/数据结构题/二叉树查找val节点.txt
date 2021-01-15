@@ -1,0 +1,40 @@
+
+
+    // 查找 val 所在结点，没有找到返回 null
+// 按照 根 -> 左子树 -> 右子树的顺序进行查找
+// 一旦找到，立即返回，不需要继续在其他位置查找
+
+
+
+
+
+Node find(Node root, int val) {
+        if (root == null) return null;
+        if (root.val == val) { //引用类型 用equls
+            return root;
+        }
+        
+        /*      错误写法 没有接收 find的返回值
+            
+        if (find(root.left,val) != null){ //左子树 有 返回
+            return root.left;
+        }else if (find(root.right,val)!= null){  //右子树有  返回
+            return root.right;
+        }else { //左右都没有返回null
+            return null;
+        }*/
+        
+        Node ret1 = find(root.left,val);
+        if (ret1 != null){//左侧查找
+            return ret1;
+        }
+        Node ret2 = find(root.left,val);
+        if (ret2 != null){//右侧查找
+            return ret2;
+        }
+        //return null;  //左右侧都找完了 没有
+
+        //大佬写法：
+        Node leftFind = find(root.left,val);
+        return leftFind == null ? find(root.right, val): leftFind;
+    }

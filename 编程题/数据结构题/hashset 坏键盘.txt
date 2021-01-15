@@ -1,0 +1,37 @@
+旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。现在给出应该输入的一段文字、以及实际被输入的文字，请你列出
+肯定坏掉的那些键。
+
+
+
+思路：
+
+1.转换大小写，
+2.建立哈希set 用来存放已经输出的，
+3.遍历输入的   不存在则放入哈希集合2，
+4.输出哈希集合2
+
+
+
+
+
+
+
+	public static void main(String[] args) {
+        func("7_This_is_a_test","_hs_s_a_es");
+    }
+
+    private static void func(String strMust, String strAct) {
+        HashSet<Character> setAct = new HashSet<>();//setact:_hsae
+        for (char ch:strAct.toUpperCase().toCharArray()) {
+            setAct.add(ch);
+        }
+        HashSet<Character> setBroken = new HashSet<>();
+        char[] StrMusts = strMust.toUpperCase().toCharArray();
+        for (char ch2: StrMusts) {
+            //ch2 是个坏键盘
+            if (!setAct.contains(ch2) && !setBroken.contains(ch2)){
+                setBroken.add(ch2);//不包含添加一次 并输出一次
+                System.out.println(ch2);// 下次还出现则不会进入循环，则不会输出
+            }
+        }
+    }

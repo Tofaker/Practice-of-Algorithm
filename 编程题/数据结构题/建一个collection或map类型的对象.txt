@@ -1,0 +1,8 @@
+
+
+
+Map<String,String> map = new HashMap<>();
+        map.put("孙悟空","大师兄");//k-v
+
+Collection<Integer> collection1 = new ArrayList<>();
+		collection1.add(1);

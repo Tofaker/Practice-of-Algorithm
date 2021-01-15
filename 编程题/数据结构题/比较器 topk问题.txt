@@ -1,0 +1,39 @@
+
+
+采用比较器 修改优先级队列的比较方式  
+	
+	形成k个元素大根堆 每次添加比堆顶元素小的，
+	最后返回大根堆（k个最小值元素）
+
+
+
+
+
+
+class TOPK {
+    public static void topK(int[] array, int k) {
+        //取前5个最小的元素
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2-o1;
+            }
+        });
+
+        for (int i = 0; i < array.length; i++) {
+            if (i>=k && array[i] < maxHeap.peek()){
+                maxHeap.poll();
+                maxHeap.offer(array[i]);
+            }else if (maxHeap.size() < k){
+                maxHeap.offer(array[i]);
+            }
+        }
+        System.out.println(maxHeap);
+
+
+    }
+    public static void main(String[] args) {
+        int[] array = {12,45,2,7,10,8,19,56,32};
+        topK(array,7);
+    }
+}

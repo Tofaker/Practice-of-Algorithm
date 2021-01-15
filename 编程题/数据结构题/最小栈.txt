@@ -1,0 +1,29 @@
+设计一个栈，其拥有常规的入栈、出栈操作外，需要额外具备获取最小元素的功能。
+
+
+核心  建立两个栈，使用其中一个栈来存储  每一次压栈后的最小值
+			压栈时与min栈.peek进行比较，若小就压栈不小于就不压栈，
+		相当于在原来栈的实现中多了一个getMin函数
+
+
+class MinStack{
+    private Stack<Integer> stack;
+    private Stack<Integer> minStack;
+    public MinStack(){
+        stack = new Stack<>();
+        minStack = new Stack<>();
+    }
+    public void push(int x){
+        stack.push(x);
+        if (minStack.isEmpty() || x <= minStack.peek() ) minStack.push(x);//存放第一次和最小的值
+    }
+    public void pop(int x){
+        if (stack.pop() == minStack.peek() ) minStack.pop(); //stack弹出  值与minstack栈顶值相等时一起弹出
+    }
+    public int top(){
+        return stack.peek();//栈顶值  与minstack无关
+    }
+    public int getMin(){    //只多了一个弹出最小值函数
+        return minStack.peek();
+    }
+}

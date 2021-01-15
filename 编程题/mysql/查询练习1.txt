@@ -1,0 +1,23 @@
+
+
+查询用户user表中，满足以下条件的用户数据：
+1. ID在1至200或300至500，且账号accout列不为空
+
+2. 充值金额amount在1000以上。
+drop table count;
+create table count (
+user_id int,
+user_name varchar(20),
+user_account decimal(6,1),
+user_amount decimal(6,1)
+);
+
+insert into count values
+(111,'zhangsan1',110110,111.1),
+(222,'zhangsan2',null,222.1),
+(333,'zhangsan3',null,333.1),
+(444,'zhangsan4',110112,4444.1),
+(555,'zhangsan5',110113,555.1);
+
+select * from count where (
+(user_id between 1 and 200) or (user_id between 300 and 500)) and (user_account != null) and(user_amount>=1000);

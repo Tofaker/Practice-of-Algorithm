@@ -1,0 +1,29 @@
+
+
+
+
+
+
+
+class HomeWork {
+    public static void main(String[] args) {
+
+    }
+    public static boolean[] chkSubStr(String[] p, int n, String s) {
+        boolean[] tmp = new boolean[n];
+        HashMap<String,Boolean> hashMap = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            hashMap.put(p[i],false);
+        }
+        for (String str: hashMap.keySet() ) {
+            if (s.contains( str ) ){
+                hashMap.put(str,true);
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            tmp[i] = hashMap.get(p[i]);
+        }
+
+        return tmp;
+    }
+}

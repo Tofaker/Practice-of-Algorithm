@@ -1,0 +1,57 @@
+给定一个段落 (paragraph) 和一个禁用单词列表 (banned)。返回出现次数最多，同时不在禁用列表中的单词。
+
+题目保证至少有一个词不在禁用列表中，而且答案唯一。
+
+禁用列表中的单词用小写字母表示，不含标点符号。段落中的单词不区分大小写。答案都是小写字母。
+
+链接：https://leetcode-cn.com/problems/most-common-word
+
+
+核心代码：
+
+	HashSet<String> banSet = new HashSet<>();
+        for (String s : banned){
+            banSet.add(s);
+        }
+        paragraph = paragraph.replaceAll(","," ").replace(".", " ").replace("!", " ");
+        String[] graph = paragraph.split("\\s+");//
+
+
+
+
+
+
+
+
+	public String mostCommonWord(String paragraph, String[] banned) {
+        HashSet<String> banSet = new HashSet<>();
+        for (String s : banned){
+            banSet.add(s);
+        }
+        paragraph = paragraph.replaceAll(","," ").replace(".", " ").replace("!", " ");
+        String[] graph = paragraph.split("\\s+");//
+        // \\s+表示 空格,回车,换行等空白符
+        //+号表示一个或多个的意思,所以...
+        HashMap<String,Integer> hashMap = new HashMap<>();
+        for (String str: graph) {
+            str= str.toLowerCase();
+            if (banSet.contains(str)){
+                continue;
+            }
+            if (!hashMap.containsKey(str)){
+                hashMap.put(str,1);
+            }
+            if (hashMap.containsKey(str)){
+                hashMap.put(str,hashMap.get(str)+1);
+            }
+        }
+        int max = 0;
+        String maxString = "";
+        for (String s: hashMap.keySet()){
+            if (hashMap.get(s)>max){
+                max = hashMap.get(s);
+                maxString = s;
+            }
+        }
+        return maxString;
+    }

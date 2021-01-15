@@ -1,0 +1,88 @@
+
+
+
+
+优化1：low 到 high之间的数据都小于某个值的时候，采用直接插入排序
+优化2：三数取中法
+
+
+
+
+
+
+//快速排序的两种优化
+    public static void quick(int[] array,int low,int high){
+        if (low >= high) return;
+        //1、优化   当 low  high  之间的数据个数  小于 某个值的时候   采用直接插入排序
+        if (high-low+1 <= 100){   //优化法 1
+            insertSort2(array,low,high);
+            return;
+        }
+        // 优化法2  三数取中法
+        medianOfThree(array,low,high);
+        int par = partion(array,low,high);//基准 par
+        quick(array,low,par-1);
+        quick(array,par+1,high);
+    }
+
+    // par 划分
+    private static int partion(int[] array, int start, int end) {
+        int tmp = array[start];
+        while (start < end){
+            while (start < end && array[end] >= tmp){
+                end--;
+            }
+            if (start >=end){
+                break;
+            }else {
+                array[start] = array[end];
+            }
+            while (start < end && array[start] <= tmp){
+                start++;
+            }
+            if (start >= end){
+                break;
+            }else {
+                array[end] = array[start];
+            }
+        }
+        array[start] = tmp;//start 和 end 相遇   tmp放回 因为分支中都会用到 ，所以提到后面
+        return start;   //此时start下标的值 是 分割值 左边全小于分割值 右边全大于分割值
+    }
+    //优化法1
+    public static void insertSort2(int[] array,int low,int high) {
+        for (int i = low+1; i <= high; i++) {
+            int tmp = array[i];
+            int j = i-1;
+            for (; j >= low; j--) {
+                if(array[j] > tmp) {
+                    array[j+1] = array[j];
+                }else {
+                    break;
+                }
+            }
+            array[j+1] = tmp;
+        }
+    }
+
+    //优化2 三数取中法
+    private static void medianOfThree(int[] array, int low, int high) {
+        int mid = (low+high)/2;//中间值
+
+        //low下标是中间值(因为要选做基准所以不能取最小)  high是最大值
+        if (array[low] >= array[high]){
+            swap(array,low,high);
+        }
+        if (array[low] <= array[mid]){
+            swap(array,low,mid);
+        }
+        if (array[mid] >= array[high]){
+            swap(array,low,mid);
+        }
+    }
+    //交换函数
+    public static void swap(int[] array,int low,int high){
+        int tmp = array[low];
+        array[low] = array[high];
+        array[high] = tmp;
+    }

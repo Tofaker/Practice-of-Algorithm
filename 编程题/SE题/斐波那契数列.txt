@@ -1,0 +1,61 @@
+
+
+求第n项斐波那契数，
+
+    非递归 和递归
+
+	1.非递归：  n-2项   +   n-1项 =    第n项
+
+	       f1 表示n-2项   f2 表示n-1项   f3第n项
+	
+
+
+	for (int i = 3; i <= n ; i++) {
+            f3 = f1+f2;
+            //确定f1 f2的新的值
+            f1 = f2;
+            f2 = f3;
+        }
+
+
+
+
+
+    public static int fib(int n) {
+        int f1 = 1;
+        int f2 = 1;
+        int f3 = 1;
+        for (int i = 3; i <= n ; i++) {
+            f3 = f1+f2;
+            //确定f1 f2的新的值
+            f1 = f2;
+            f2 = f3;
+        }
+        return f3;
+    }
+
+
+
+
+
+
+
+    方法2：递归求斐波那契数    重复计算次数过大  不建议使用
+
+        f(n)
+        int ret = fibOr(n-1)+fibOr(n-2);
+
+        count计数 计算次数
+
+        static int count = 0;
+            public static int fibOr(int n) {
+                if(n == 1) {
+                    count++;
+                    return 1;
+                }
+                if(n == 2) {
+                    return 1;
+                }
+                int ret = fibOr(n-1)+fibOr(n-2);
+                return ret;
+            }

@@ -1,0 +1,13 @@
+
+
+
+
+create table goods(
+good_name varchar(20),
+good_pric decimal(4,2),
+good_has int,
+good_statements text
+);
+insert into goods values
+('学生书包',18.91,101,''),
+('tang',1.5,10,'tiantiantian');

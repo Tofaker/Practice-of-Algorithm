@@ -1,0 +1,42 @@
+
+1.处理输入 ：循环输入、分为数组 ：char转为int  ：int n = Integer.parseInt(split[i]);
+2.修改优先队列为大根堆存放k个数，遍历数组存进去k个最小的，然后输出
+
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()){
+            String str = scanner.nextLine().trim();
+            String[] split = str.split(" ");
+            int[] array = new int[split.length-1];
+            for (int i = 0; i < split.length-1; i++) {
+                array[i] = Integer.parseInt(split[i]);
+            }
+            int k = Integer.parseInt(split[split.length-1]);
+            int[] func = func(array,k);
+            for (int i :func) {
+                System.out.print(i+" ");
+            }
+        }
+    }
+
+    private static int[] func(int[] array, int k) {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2-o1;
+            }
+        });
+        for (int i = 0; i < array.length; i++) {
+            if (i < k) {
+                priorityQueue.offer(array[i]);
+            }else if (array[i] < priorityQueue.peek()){
+                priorityQueue.poll();
+                priorityQueue.offer(array[i]);
+            }
+        }
+        int[] arr = new int[k];
+        for (int i = 0; i < k; i++) {
+            arr[k-1-i] = priorityQueue.poll();
+        }
+        return arr;
+    }

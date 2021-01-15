@@ -1,0 +1,26 @@
+//思路 string转为数组，再遍历数组元素改变值，
+//再转为string输出
+//关键 ：
+//       str = String.copyValueOf(arr);//数组转为字符串
+//      char[] arr= str.toCharArray();//字符串转为数组
+
+public class replace {
+    public static void main(String[] args) {
+        String str = "asdfqwersdfg";
+        System.out.println(str);
+        str = replace1(str,'a','v');
+        System.out.println(str);
+    }
+
+    public static String replace1(String str, char a, char b){
+        char[] arr= str.toCharArray();
+        for (int i = 0; i <arr.length-1 ; i++) {
+            if (arr[i] == a){
+                arr[i]=b;
+            }
+        }
+        str = String.copyValueOf(arr);//数组转为字符串
+        System.out.println(str);
+        return str;
+    }
+}

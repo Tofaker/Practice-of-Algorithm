@@ -1,0 +1,25 @@
+
+查询book图书表中，作者author列不为空，或者满足条件：价格price在50元以上且出版日期publish_date在2019年之后的图书信息
+
+答题
+drop table tushubiao;
+
+create table tushubiao(
+
+name varchar(20),
+
+author varchar(20),
+
+publish_date int
+
+);
+
+
+
+insert into tushubiao values
+
+('java核心技术','cay s.horstman',1995,),
+
+('book2','author2',16,2200,);
+
+select * from tushubiao where author is not null or (price>50 and publish_date >2019);

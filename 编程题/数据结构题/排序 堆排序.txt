@@ -1,0 +1,27 @@
+
+思路： 从大到小：
+		建立小根堆，每次将堆顶放在堆尾，end--，
+		当end=0，数组中usedsize长度的就是从大到小（代码略）
+
+
+思路：从小到大
+
+	//堆排序：每次把大根堆的堆顶元素给堆尾，end--，直到end=0，
+    // 数组中 usedsize长度就是从小到大排列的数字
+
+
+
+    public void heapSort(){ //堆排序
+        int end = this.usedSize-1;
+        while (end > 0){
+            swap(0,end);//交换0号与end下标的值
+            adjustDown(0,end);//向下调整
+            end--;
+        }
+    }
+    public void show(){ //显示堆
+        for (int i = 0; i < usedSize ; i++) {
+            System.out.println(this.elem[i]+" ");
+        }
+        System.out.println();
+    }

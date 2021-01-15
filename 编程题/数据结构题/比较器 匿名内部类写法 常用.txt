@@ -1,0 +1,17 @@
+
+
+
+
+public class TestDemo4 {
+    public static void main(String[] args) {
+        PriorityQueue<Animal> priorityQueue1 = new PriorityQueue<>(new Comparator<Animal>() {	//匿名内部类
+            @Override
+            public int compare(Animal o1, Animal o2) {
+                return 0;
+            }
+        });
+        priorityQueue.offer(new Animal("huahua",12));
+        priorityQueue.offer(new Animal("niania",13));
+        
+    }
+}

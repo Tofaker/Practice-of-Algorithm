@@ -1,0 +1,33 @@
+	完全二叉树
+
+	最后一层的元素   如果此层队列 某一个为null 后面的肯定 为 null (完全二叉树)   否则不是完全二叉树
+
+
+		
+
+
+
+
+
+
+
+boolean isCompleteTree (Node root){
+        Queue<Node> queue = new LinkedList<>();
+        if (root ==null) return true;
+        queue.offer(root);
+
+        压入最后一层的元素到cur
+
+        Node cur = queue.poll();
+        while (cur != null){
+            queue.offer(cur.left);
+            queue.offer(cur.right);
+            cur = queue.poll();
+        }
+        //判断 剩下的元素 是否有非空的元素
+        while (!queue.isEmpty()){
+            cur = queue.poll();
+            if (cur != null) return false;
+        }
+        return true;
+    }

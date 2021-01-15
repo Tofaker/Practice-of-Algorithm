@@ -1,0 +1,45 @@
+https://blog.csdn.net/qq_43109561/article/details/93491616
+
+
+package HomeWork;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User: madala
+ * Date: 2021-01-05;   Time: 20:44
+ */
+class person{
+    public String name ;
+    public int core;
+
+    public person(String name, int core) {
+        this.name = name;
+        this.core = core;
+    }
+}
+public class test2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()){
+            int n = sc.nextInt();
+            int option = sc.nextInt();
+            List<person> list = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                list.add(new person(sc.next(),sc.nextInt()));
+            }
+            if (option == 0){
+                list.sort((o1, o2) -> o2.core-o1.core);
+            }else if (option == 1){
+                list.sort((o1, o2) -> o1.core - o2.core);
+            }
+            for (person ps : list){
+                System.out.println(ps.name+" "+ps.core);
+            }
+        }
+    }
+}

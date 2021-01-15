@@ -1,0 +1,70 @@
+
+Comparable也在类的内部重写，
+
+重写equals在 类的内部重写 ，在外部调用
+
+
+
+
+class Card implements Comparable<Card>{
+    public int rank; // 数值
+    public String suit; // 花色
+    public Card(int rank, String suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+
+    /**
+     * 返回值等于0  相等
+     * 大于0
+     * 小于0
+     */
+    @Override		//重写compareTo
+    public int compareTo(Card o) {
+        return this.rank - o.rank;
+    }
+
+    /**
+     * 以后  如果是自定义类型进行equals比较的时候
+     * 一定要记得重写Object的equals方法
+     * 如果不写：
+     * if (this == obj) {
+     *     return true;
+     * }
+     */
+    
+    @Override
+    public boolean equals(Object obj) {
+        //引用同一个对象
+        if (this == obj) {
+            return true;
+        }
+        //obj可以是card的子类  也可以是 Card 本身
+        if (obj == null || !(obj instanceof Card)) {
+            return false;
+        }
+        Card card = (Card) obj;
+        if(this.rank == card.rank
+                && this.suit.equals(card.suit)) {
+            return true;
+        }
+        return false;
+    }
+
+    
+}
+public class TestDemo1 {
+    public static void main(String[] args) {
+        
+        System.out.println(card1 < card2);
+        System.out.println(card1 == card2);
+        System.out.println(card1.equals(card2));
+        //比较对象 需要重写equals方法，
+
+        String str1 = "hello";
+        String str2 = new String("hello");
+        System.out.println(str1 == str2);//比较两个地址
+        System.out.println(str1.equals(str2));//直接比较字符内容
+        
+    }
+}

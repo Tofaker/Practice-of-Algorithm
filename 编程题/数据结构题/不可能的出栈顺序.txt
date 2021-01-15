@@ -1,0 +1,56 @@
+https://blog.csdn.net/u011982340/article/details/39249651
+
+思路：入栈为ABCDE，出栈就不可能是DCEAB，因为D第一个出栈说明ABC仍在栈中，无论E什么时候入栈都会保持C B A的出栈顺序
+题目:一个栈的输入顺序是a,b,c,d,e则下列序列中不可能是出栈顺序是()
+A:e,d,a,c,b
+B:a,e,d,c,b
+C:b,c,d,a,e
+D:b,c,a,d,e
+分析：
+A：e先出栈，栈中有dcba，这时候只会有edcba的出栈顺序
+B：a先出栈，e再出栈，说明栈中有dcb，也只能是dcb的出栈顺序
+C：bcd依次出栈，栈中有a，此时无论ae和ea都可以
+D：bc依次出栈，栈中有a，a再出栈，此时无论de还是ed都可以
+
+
+
+
+
+
+
+
+代码实现过程：
+
+public class TestDemo3 {
+    public static void main(String[] args) {
+        int [] pushA = {1, 2, 3, };
+        int [] popA = {3,2,1};
+        //IsPopOrder(pushA,popA);
+        System.out.println(IsPopOrder(pushA,popA));
+    }
+    public static boolean IsPopOrder( int [] pushA,int [] popA) {
+        Stack<Integer> stack1 = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
+        if (pushA != null && popA !=null){
+            for (int tmp : pushA) {     //入栈
+                stack1.push(tmp);
+            }
+            for (int tmp : popA) {      //入栈
+                stack2.push(tmp);
+            }
+        }
+        Stack<Integer> stack3 = new Stack<>();//辅助栈
+        while ((!stack3.isEmpty()) || (!stack2.isEmpty())){
+            if ((stack1.isEmpty() ^ stack3.isEmpty()) && stack2.isEmpty()) return false;
+            if (stack1.isEmpty() && stack3.isEmpty() && stack2.isEmpty()) break;
+            while ( (!stack2.isEmpty()) && (stack1.peek() != stack3.peek())){
+                stack3.push(stack2.pop());  //  重要的 辅助栈
+            }
+            if (stack1.peek() == stack3.peek()){
+                stack1.pop();
+                stack3.pop();
+            }
+        }
+        return true;
+    }
+}

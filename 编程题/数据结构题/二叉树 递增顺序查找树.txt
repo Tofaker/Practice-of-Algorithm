@@ -1,0 +1,32 @@
+
+
+给你一个树，请你 按中序遍历 重新排列树，使树中最左边的结点现在是树的根，
+并且每个结点没有左子结点，只有一个右子结点。
+
+
+
+
+
+核心  ：采用中序遍历 改变操作部分
+
+		tmp.right = new Node(root.val); //操作部分
+        tmp = tmp.right;    //一直向右移动
+
+
+
+	Node head = new Node('a');// 返回 节点
+    Node tmp = head;    //构造节点  会产生改变
+
+    public Node increasingBST(Node root){
+        //采用中序遍历 进行操作
+        if (root == null)return null;
+
+        increasingBST(root.left);   //中序
+
+        tmp.right = new Node(root.val); //操作部分
+        tmp = tmp.right;    //一直向右移动
+
+        increasingBST(root.right);  //中序
+
+        return head.right;
+    }

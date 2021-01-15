@@ -1,0 +1,60 @@
+
+难点为非递归的后序遍历
+
+// 非递归的前序遍历
+    void preOrderTraversal(Node root){
+        if (root == null) return;
+        Node cur = root;
+        Stack<Node> stack = new Stack<>();
+        while (cur != null ||!stack.isEmpty()){
+            while (cur != null){
+                System.out.println(cur.val);//操作值的部分
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop().right;
+        }
+    }
+
+
+    // 中序遍历
+    void inOrderTraversal(Node root) {
+        if (root == null) return;
+        Node cur = root;
+        Stack<Node> stack = new Stack<>();
+        while (cur != null || stack != null){
+            while (cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            System.out.println(stack.peek().val);
+            cur = stack.pop().right;
+        }
+    }
+
+
+
+    核心 prev 的使用
+
+    // 后序遍历 11.10日视频 40-50min内
+    void postOrderTraversal(Node root) {
+        if (root == null) return;
+        Node cur = root;
+        Node prev = null;
+        Stack<Node> stack = new Stack<>();
+        while (cur != null || !stack.isEmpty()){
+            while (cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.peek();
+            if (cur.right == null || cur == prev){
+                stack.pop();
+                System.out.println(cur.val);
+                prev = cur;
+                cur = null;
+            }else {
+                cur = cur.right;
+            }
+        }
+    }

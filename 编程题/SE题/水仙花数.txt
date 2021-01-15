@@ -1,0 +1,34 @@
+while a<999{
+	int b=(int)(a/100);//取百位
+    int c=(int)(a/10-b*10);//取十位
+    int d=a-b*100-c*10;取个位
+    	if (b*b*b+c*c*c+d*d*d == a)//复符合水仙花数
+}
+
+
+
+
+
+
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User: madala
+ * Date: 2020-10-31;   Time: 21:46
+ */
+public class demo1 {
+    public static void main(String[] args) {
+        int a =1;//水仙花数 不应该从100开始吗？
+        while(a<999){
+            int b=(int)(a/100);
+            int c=(int)(a/10-b*10);
+            int d=a-b*100-c*10;
+            if (b*b*b+c*c*c+d*d*d == a){
+                System.out.println(a+"是一个水仙花数");
+            }
+            a++;
+        }
+
+    }
+}
