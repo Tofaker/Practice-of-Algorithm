@@ -1,0 +1,10 @@
+
+
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()){
+        String needPayStr = scanner.next();
+        String actualPayStr = scanner.next();
+        System.out.println(needPayStr+"=="+actualPayStr);
+        }
+}//既可以读取空格相间的 一行字符串 也可以读取换行相间的字符串
