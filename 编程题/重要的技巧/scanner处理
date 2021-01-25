@@ -8,3 +8,12 @@ public static void main(String[] args) {
         System.out.println(needPayStr+"=="+actualPayStr);
         }
 }//既可以读取空格相间的 一行字符串 也可以读取换行相间的字符串
+
+
+//处理带逗号的方法   3,8,5,1,7,8     3 8 5 1 7 8
+        while (scanner.hasNext()){
+        String str = scanner.nextLine();
+        System.out.println(str);
+        String[] s1 = str.split(",",0);
+
+        }
