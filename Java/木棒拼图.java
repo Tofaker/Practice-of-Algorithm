@@ -12,9 +12,9 @@ public class 木棒拼图 {
         while (scanner.hasNextLine()){
             int n = Integer.parseInt(scanner.nextLine());
             int size = 0;//数组的有效长度
-            int[] arr = new int[n];
+            int[] arr = new int[n];//用数组来装数据
             for (int i = 0; i < n; i++) {
-                String tmp = scanner.nextLine();
+                String tmp = scanner.nextLine();//预处理
                 StringBuilder str = new StringBuilder();
                 for (int j = 2; j <tmp.length() ; j++) {
                     str.append(tmp.charAt(j));
@@ -38,7 +38,7 @@ public class 木棒拼图 {
                     sum += arr[j];
                     max =Math.max(max,arr[j]);
                 }
-                if (size > 2 && (sum-max) > max){
+                if (size > 2 && (sum-max) > max){//判断输出
                     System.out.println("Yes");
                 }else {
                     System.out.println("NO");
