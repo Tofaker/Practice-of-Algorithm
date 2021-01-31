@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,35 +9,39 @@ import java.util.Map;
 
 // Definition for Employee.
 
+
+
 class Employee {
     public int id;
     public int importance;
     public List<Integer> subordinates;
-};
-
-
-class Solution {
-
 }
 
-//主代码
-public class 员工的重要度 {
-    public static  int DFS(Map<Integer,Employee> info,int id){
-        //累加当前员工和其下属的值
-        int curImp = info.get(id).importance;
-        for(int subId : info.get(id).subordinates){
-            curImp += DFS(info,subId);
-        }
-        return curImp;
-    }
-    public static int getImportance(List<Employee> employees, int id) {
-        Map<Integer,Employee> emps = new HashMap<>();
-        for(Employee emp:employees){
-            emps.put(emp.id,emp);
-        }
-        return DFS(emps,id);
-    }
 
+//主代码       //DFS算法
+public class 员工的重要度 {
+
+    public static void getImportance(List<Employee> employees, int id) {
+        Map<Integer, Employee> emps = new HashMap<>();
+        for (Employee emp : employees) {
+            emps.put(emp.id, emp);
+        }
+        Queue<Employee> queue = new LinkedList<>();
+        queue.offer(emps.get(id));
+        int sum  = 0;
+        while (!queue.isEmpty()){
+            Employee cur = queue.poll();
+            sum += cur.importance;//加入当前员工重要度
+            for (int n: cur.subordinates) {//拿到下属数组的id在map中找到对应工号，加入到队列中
+                Employee emp = emps.get(n);
+                queue.offer(emp);
+            }
+            for (int i = 0; i < cur.subordinates.size(); i++) {
+                queue.offer(emps.get(cur.subordinates.get(i)));//拿到下属数组的id在map中找到对应工号，加入到队列中
+            }
+        }
+        System.out.println(sum);
+    }
     public static void main(String[] args) {
         List<Employee> emps = new ArrayList<>();
         //emps.add(new Employee([1, 5, [2, 3])
