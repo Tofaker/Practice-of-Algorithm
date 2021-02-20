@@ -1,1 +1,6 @@
 for (char ch ='a'; ch <= 'z'; ch++){
+
+
+
+sb.append((char)(str.charAt(i) +32));
+}
